@@ -25,6 +25,24 @@ The forecasting pipeline works in two main stages:
 
 ---
 
+## 🖼️ Application Screenshots
+
+<p align="center">
+  <img src="images/Diapositive1_first_interface.PNG" width="800" alt="First interface" />
+</p>
+
+<p align="center">
+  <img src="images/Diapositive2_Full_screen_button.PNG" width="380" alt="Full screen button" />
+  <img src="images/Diapositive3_full_screen_results.PNG" width="380" alt="Full screen results" />
+</p>
+
+<p align="center">
+  <img src="images/Diapositive4_download_xlsx_format.PNG" width="380" alt="Download xlsx format" />
+  <img src="images/Diapositive5_results_xlsx.PNG" width="380" alt="Results xlsx" />
+</p>
+
+---
+
 ## 🛍️ Supported Product Categories
 
 The application supports the following product categories:
@@ -37,41 +55,9 @@ The application supports the following product categories:
 
 ---
 
-## 🖼️ Application Screenshots
 
-<p align="center">
-  <img src="images/Diapositive1_first_interface.PNG" width="800" alt="First interface" />
-</p>
 
-<p align="center">
-  <img src="images/Diapositive2_Full_screen_button.PNG" width="380" alt="Full screen button" />
-  <img src="images/Diapositive3_full_screen_results.PNG" width="380" alt="Full screen results" />
-</p>
 
-<p align="center">
-  <img src="images/Diapositive4_download_xlsx_format.PNG" width="380" alt="Download xlsx format" />
-  <img src="images/Diapositive5_results_xlsx.PNG" width="380" alt="Results xlsx" />
-</p>
-
----
-
-## 🖼️ Application Screenshots
-
-<p align="center">
-  <img src="images/Diapositive1_first_interface.PNG" width="800" alt="First interface" />
-</p>
-
-<p align="center">
-  <img src="images/Diapositive2_Full_screen_button.PNG" width="380" alt="Full screen button" />
-  <img src="images/Diapositive3_full_screen_results.PNG" width="380" alt="Full screen results" />
-</p>
-
-<p align="center">
-  <img src="images/Diapositive4_download_xlsx_format.PNG" width="380" alt="Download xlsx format" />
-  <img src="images/Diapositive5_results_xlsx.PNG" width="380" alt="Results xlsx" />
-</p>
-
----
 
 ## 🎬 Demo Video
 
