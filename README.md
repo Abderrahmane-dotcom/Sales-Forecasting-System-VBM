@@ -53,23 +53,6 @@ The application supports the following product categories:
 - LIPTON
 - SNACKS
 
----
-
-
-
-
-
-## 🎬 Demo Video
-
-<p align="center">
-  <video src="video_demo.webm" width="900" controls muted playsinline></video>
-</p>
-
-This demo shows the application workflow: selecting a product category, entering a target month, processing the data, and generating the sales forecast.
-
-> **Note:** GitHub may not render `.webm` files directly inside the README. If the player above does not work, you can open the [`video_demo.webm`](video_demo.webm) file directly from the repository.
-
----
 
 ## 🧩 Project Structure
 
