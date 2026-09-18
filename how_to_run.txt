@@ -1,0 +1,13 @@
+Make sure first you have python 3.11.9 installed (https://www.python.org/downloads/release/python-3119/).
+
+1. Activate the virtual environment (command = `venv311\Scripts\Activate`)
+2. Start the Streamlit app from the project root by running :
+
+     `python -m streamlit run app.py`
+
+3. Open the page in the browser, choose a product category, enter a month in `YYYY-MM` format, and click `Process`.
+
+
+# to change to tendency of the model to over-predict or under-predict change the value of "quantile_alpha" in
+train_xgboost function in trainer.py    :
+the more  quantile_alpha is close to 1, the more the model tend to over-predict values.

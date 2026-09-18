@@ -1,0 +1,158 @@
+# Sales Forecasting Project
+
+This project is a monthly sales forecasting application for product categories sold. It builds features from historical sales, trains an XGBoost regression model, and returns a forecast for a chosen product category and year-month.
+
+The app is built with Streamlit and uses SQL Server data as the source of truth. The forecasting pipeline works in two stages:
+
+1. Load historical sales for the selected product category.
+2. Prepare monthly features, train the model, and generate a prediction for the requested month.
+
+The project currently supports these product categories:
+
+- CSD
+- WATER
+- ENERGY
+- LIPTON
+- SNACKS
+
+## Main Files
+
+### `app.py`
+Streamlit user interface for the forecasting app.
+
+What it does:
+
+- Displays the title and input form.
+- Lets the user choose a product category.
+- Lets the user enter a target month in `YYYY-MM` format.
+- Loads the data, trains the model, runs inference, and shows the result.
+- Builds an Excel file for download.
+
+### `trainer.py`
+Contains the training pipeline and data preparation utilities for training.
+
+Main responsibilities:
+
+- Connects to the SQL Server database.
+- Retrieves historical daily sales.
+- Fills missing days with zero sales where needed.
+- Aggregates sales to monthly level.
+- Filters routes with enough history.
+- Creates features used by the model.
+- Trains an XGBoost regressor using the tuned hyperparameters.
+- Saves the trained model for the selected category.
+
+Main functions:
+
+- `get_data(product_category, end_date)`: reads historical data from SQL Server, up to the end_date (end_date excluded)
+- `process_for_training(df)`: prepares the training dataset and features.
+- `train_xgboost(X_train, y_train, params_path, product_category)`: trains and saves the model.
+
+### `inference.py`
+Contains the inference pipeline and feature engineering used at prediction time.
+
+Main responsibilities:
+
+- Reads historical data for inference.
+- Builds monthly route-level data.
+- Creates lag features for the prediction month.
+- Computes calendar features such as Ramadan and Eid indicators.
+- Normalizes lag values using route statistics.
+- Handles missing lag history by looking back up to 5 years.
+- Returns the final dataframe used by the UI for prediction.
+
+Important function:
+
+- `preprocess_for_inference(df, product_category, input_month)`: prepares the dataframe used to score the model.
+
+### `models/`
+Stores the saved model artifacts.
+
+Files in this folder:
+
+- `xgb_best_params.json`: tuned XGBoost hyperparameters used for training.
+- `xgb_model_CSD.json`: saved model for CSD.
+- `xgb_model_WATER.json`: saved model for WATER.
+- `xgb_model_ENERGY.json`: saved model for ENERGY.
+- `xgb_model_LIPTON.json`: saved model for LIPTON.
+- `xgb_model_SNACKS.json`: saved model for SNACKS.
+
+## How The Forecast Works
+
+The model uses a monthly feature set built from historical quantities. The most important features are:
+
+- Lag values for months 1, 2, 3, 8, 9, 10, 11, and 12 back.
+- Seasonal indicators such as summer months.
+- Cyclical month encoding using sine and cosine.
+- Trend features such as slope and mean across lag 11 to lag 8.
+- Religious calendar features:
+    - Ramadan ratio (number of ramadan days divided by the number of days of the month)
+    - Eid al-Fitr indicator
+    - Eid al-Adha indicator
+
+Training uses the target `QTY_CS_scaled`, which is the sales quantity standardized by the route mean and standard deviation.
+
+At inference time, the app predicts `predicted_QTY_CS_scaled` and converts it back to the original sales scale using the route mean and standard deviation.
+
+## Data Source
+
+The application reads from the `SAMNA_DW` SQL Server database, table `[SAMNA_DW].[dbo].[Sales]`.
+
+The code uses a trusted SQL Server connection with ODBC Driver 18 and connects to the server configured in the source files.
+
+## Lag Fallback Behavior
+
+During inference, each lag feature (`QTY_CS_lag_n`) is populated using a hierarchical fallback strategy to maximize data availability.
+
+For every requested lag, the following steps are applied in order:
+
+1. **Route history (SalesHierarchy_PK)**  
+   The model first looks for the requested lag month for the same `SalesHierarchy_PK`. If the value is zero or missing, it searches the same calendar month in previous years (up to 5 years back).
+
+2. **S_UNIT average**  
+   If no valid route-level value is found, the model searches the same month (again up to 5 years back) across all routes belonging to the same `S_UNIT` and uses the average `QTY_CS`.
+
+3. **Global average**  
+   If the `S_UNIT` search also fails, the model searches the same month across the entire dataset (up to 5 years back) and uses the global average `QTY_CS`.
+
+## Output
+
+The Streamlit app displays a result table with:
+
+- `SalesHierarchy_PK`
+- `year_month`
+- `predicted_QTY_CS`
+- `SLSMAN_NAME`
+- `S_UNIT`
+- The lag values used for inference
+
+The app also lets the user download the results as an Excel file named after the selected product category and month.
+
+## Requirements
+
+Typical Python dependencies used by the project:
+
+- streamlit
+- pandas
+- numpy
+- sqlalchemy
+- pyodbc
+- xgboost
+- hijri-converter
+- openpyxl
+- pendulum
+
+All of the dependencies are in the virtual environnement venv311
+
+The project was developed for Python 3.11.9 (https://www.python.org/downloads/release/python-3119/)
+
+## How To Run
+Make sure first you have python 3.11.9 installed.
+
+1. Activate the virtual environment (command = `venv311\Scripts\Activate`)
+2. Start the Streamlit app from the project root by running :
+
+     `python -m streamlit run app.py`
+
+3. Open the page in the browser, choose a product category, enter a month in `YYYY-MM` format, and click `Process`.
+

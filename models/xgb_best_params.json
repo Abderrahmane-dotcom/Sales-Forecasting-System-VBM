@@ -1,0 +1,15 @@
+{
+    "max_depth": 8,
+    "eta": 0.05047055630099957,
+    "subsample": 0.8065646065710104,
+    "colsample_bytree": 0.9649368695767699,
+    "lambda": 1.0447022753905213,
+    "alpha": 1.4857229773271654,
+    "gamma": 2.1339116623782397,
+    "min_child_weight": 2.789148198005783,
+    "grow_policy": "depthwise",
+    "max_leaves": 121,
+    "max_bin": 375,
+    "colsample_bylevel": 0.7353753598190592,
+    "n_estimators": 302
+}
