@@ -1,4 +1,20 @@
-# Sales Forecasting Project
+# 📈 Sales Forecasting Project
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3.11.9-3776AB?style=for-the-badge&logo=python" alt="Python 3.11.9" />
+  <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit" alt="Streamlit" />
+  <img src="https://img.shields.io/badge/XGBoost-Model-1A8BFF?style=for-the-badge&logo=xgboost" alt="XGBoost" />
+</div>
+
+## 🎬 Demo Video
+
+<p align="center">
+  <video src="video_demo.webm" width="900" controls muted playsinline></video>
+</p>
+
+This demo shows the app workflow: selecting a product category, entering a month, and generating the sales forecast.
+
+## 🌟 Overview
 
 This project is a monthly sales forecasting application for product categories sold. It builds features from historical sales, trains an XGBoost regression model, and returns a forecast for a chosen product category and year-month.
 
@@ -7,7 +23,7 @@ The app is built with Streamlit and uses SQL Server data as the source of truth.
 1. Load historical sales for the selected product category.
 2. Prepare monthly features, train the model, and generate a prediction for the requested month.
 
-The project currently supports these product categories:
+### 🛍️ Supported Categories
 
 - CSD
 - WATER
@@ -15,9 +31,9 @@ The project currently supports these product categories:
 - LIPTON
 - SNACKS
 
-## Main Files
+## 🧩 Main Files
 
-### `app.py`
+### `app.py` ⚙️
 Streamlit user interface for the forecasting app.
 
 What it does:
@@ -28,7 +44,7 @@ What it does:
 - Loads the data, trains the model, runs inference, and shows the result.
 - Builds an Excel file for download.
 
-### `trainer.py`
+### `trainer.py` 🏋️
 Contains the training pipeline and data preparation utilities for training.
 
 Main responsibilities:
@@ -48,7 +64,7 @@ Main functions:
 - `process_for_training(df)`: prepares the training dataset and features.
 - `train_xgboost(X_train, y_train, params_path, product_category)`: trains and saves the model.
 
-### `inference.py`
+### `inference.py` 🧠
 Contains the inference pipeline and feature engineering used at prediction time.
 
 Main responsibilities:
@@ -65,7 +81,7 @@ Important function:
 
 - `preprocess_for_inference(df, product_category, input_month)`: prepares the dataframe used to score the model.
 
-### `models/`
+### `models/` 📦
 Stores the saved model artifacts.
 
 Files in this folder:
@@ -77,7 +93,7 @@ Files in this folder:
 - `xgb_model_LIPTON.json`: saved model for LIPTON.
 - `xgb_model_SNACKS.json`: saved model for SNACKS.
 
-## How The Forecast Works
+## 🔎 How The Forecast Works
 
 The model uses a monthly feature set built from historical quantities. The most important features are:
 
@@ -94,13 +110,13 @@ Training uses the target `QTY_CS_scaled`, which is the sales quantity standardiz
 
 At inference time, the app predicts `predicted_QTY_CS_scaled` and converts it back to the original sales scale using the route mean and standard deviation.
 
-## Data Source
+## 🗃️ Data Source
 
 The application reads from the `SAMNA_DW` SQL Server database, table `[SAMNA_DW].[dbo].[Sales]`.
 
 The code uses a trusted SQL Server connection with ODBC Driver 18 and connects to the server configured in the source files.
 
-## Lag Fallback Behavior
+## 🧮 Lag Fallback Behavior
 
 During inference, each lag feature (`QTY_CS_lag_n`) is populated using a hierarchical fallback strategy to maximize data availability.
 
@@ -115,7 +131,7 @@ For every requested lag, the following steps are applied in order:
 3. **Global average**  
    If the `S_UNIT` search also fails, the model searches the same month across the entire dataset (up to 5 years back) and uses the global average `QTY_CS`.
 
-## Output
+## 📊 Output
 
 The Streamlit app displays a result table with:
 
@@ -128,7 +144,7 @@ The Streamlit app displays a result table with:
 
 The app also lets the user download the results as an Excel file named after the selected product category and month.
 
-## Requirements
+## ✅ Requirements
 
 Typical Python dependencies used by the project:
 
@@ -146,13 +162,19 @@ All of the dependencies are in the virtual environnement venv311
 
 The project was developed for Python 3.11.9 (https://www.python.org/downloads/release/python-3119/)
 
-## How To Run
+## 🚀 How To Run
 Make sure first you have python 3.11.9 installed.
 
 1. Activate the virtual environment (command = `venv311\Scripts\Activate`)
-2. Start the Streamlit app from the project root by running :
+2. Start the Streamlit app from the project root by running:
 
-     `python -m streamlit run app.py`
+   `python -m streamlit run app.py`
 
 3. Open the page in the browser, choose a product category, enter a month in `YYYY-MM` format, and click `Process`.
+
+---
+
+<div align="center">
+  <strong>✨ Built for smart forecasting, clearer decisions, and better planning.</strong>
+</div>
 
