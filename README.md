@@ -10,19 +10,7 @@
 
 ---
 
-## 🎬 Demo Video
-
-<p align="center">
-  <video src="video_demo.webm" width="900" controls muted playsinline></video>
-</p>
-
-This demo shows the application workflow: selecting a product category, entering a target month, processing the data, and generating the sales forecast.
-
-> **Note:** GitHub may not render `.webm` files directly inside the README. If the player above does not work, you can open the [`video_demo.webm`](video_demo.webm) file directly from the repository.
-
----
-
-## 🌟 Overview
+##  Overview
 
 This project is a **monthly sales forecasting application** designed to forecast sales quantities for different product categories.
 
@@ -64,6 +52,36 @@ The application supports the following product categories:
   <img src="images/Diapositive4_download_xlsx_format.PNG" width="380" alt="Download xlsx format" />
   <img src="images/Diapositive5_results_xlsx.PNG" width="380" alt="Results xlsx" />
 </p>
+
+---
+
+## 🖼️ Application Screenshots
+
+<p align="center">
+  <img src="images/Diapositive1_first_interface.PNG" width="800" alt="First interface" />
+</p>
+
+<p align="center">
+  <img src="images/Diapositive2_Full_screen_button.PNG" width="380" alt="Full screen button" />
+  <img src="images/Diapositive3_full_screen_results.PNG" width="380" alt="Full screen results" />
+</p>
+
+<p align="center">
+  <img src="images/Diapositive4_download_xlsx_format.PNG" width="380" alt="Download xlsx format" />
+  <img src="images/Diapositive5_results_xlsx.PNG" width="380" alt="Results xlsx" />
+</p>
+
+---
+
+## 🎬 Demo Video
+
+<p align="center">
+  <video src="video_demo.webm" width="900" controls muted playsinline></video>
+</p>
+
+This demo shows the application workflow: selecting a product category, entering a target month, processing the data, and generating the sales forecast.
+
+> **Note:** GitHub may not render `.webm` files directly inside the README. If the player above does not work, you can open the [`video_demo.webm`](video_demo.webm) file directly from the repository.
 
 ---
 
