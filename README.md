@@ -28,7 +28,7 @@ The forecasting pipeline works in two main stages:
 
 
 ## 🖼️ Video Demo
-https://github.com/user-attachments/assets/1489bfeb-aa73-44b6-a39f-dee627ae037d
+https://github.com/Abderrahmane-dotcom/Sales-Forecasting-System-VBM/issues/1#issue-5552381405
 ---
 
 ## 🛍️ Supported Product Categories
